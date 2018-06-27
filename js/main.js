@@ -11,13 +11,27 @@ btn.addEventListener("click", function(){
   const daRequest = new XMLHttpRequest();
   daRequest.open("GET", `https://learnwebcode.github.io/json-example/animals-${pageCount}.json`);
   daRequest.onload = function(){
+    // TESTING
     // console.log(daRequest.responseText);
-    let daData = JSON.parse(daRequest.responseText);
-    // first object
-    // console.log(daData[0])
-    renderHTML(daData)
+    // ERROR HANDLING
+    if (daRequest.status >= 200 && daRequest.status < 400){
+      let daData = JSON.parse(daRequest.responseText);
+      // first object
+      // console.log(daData[0])
+      renderHTML(daData);
+    } else {
+      // handle the error
+      console.log("connected to the server, but it returned an error");
+    }
   };
+
+  daRequest.onerror = function(){
+    // handle the error for the XMLHttpRequest
+    console.log("connection error")
+  };
+
   daRequest.send();
+
   pageCount++;
   if (pageCount > 3) {
     btn.classList.add("hide-me");
