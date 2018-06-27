@@ -27,7 +27,7 @@ btn.addEventListener("click", function(){
 
   daRequest.onerror = function(){
     // handle the error for the XMLHttpRequest
-    console.log("connection error")
+    console.log("connection error");
   };
 
   daRequest.send();
@@ -35,7 +35,7 @@ btn.addEventListener("click", function(){
   pageCount++;
   if (pageCount > 3) {
     btn.classList.add("hide-me");
-    // return
+    animalContainer.insertAdjacentHTML("afterEnd", "<p>No more data</p>");
   }
 })
 
@@ -48,7 +48,6 @@ function renderHTML(data){
         htmlString += data[i].foods.likes[j];
       } else {
         htmlString += " and " + data[i].foods.likes[j];
-
       }
     }
 
@@ -59,7 +58,6 @@ function renderHTML(data){
         htmlString += data[i].foods.dislikes[j];
       } else {
         htmlString += " and " + data[i].foods.dislikes[j];
-
       }
     }
 
